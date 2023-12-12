@@ -1,4 +1,5 @@
 import { SignInWithGoogleAuth , createUserDocument } from "../../utils/firebase.utils";
+import SignUpForm from "../../components/signup-form/signup.component";
 
 const SignIn = () => {
     const logUser = async () => {
@@ -12,6 +13,8 @@ const SignIn = () => {
       <div>
         <h1>Hello World</h1>
         <button onClick={logUser}>Google</button>
+
+        <SignUpForm />
       </div>
     );
   };

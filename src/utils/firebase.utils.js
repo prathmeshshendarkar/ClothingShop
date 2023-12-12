@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { signInWithPopup , GoogleAuthProvider , getAuth } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCioCrg1Tljc37byoh209TbP_b3xtc3fCU",
@@ -45,6 +46,22 @@ export const createUserDocument = async (userAuth) => {
       await setDoc(userDocumentRef, {displayName, email, createdAt});
     }catch (err){
       console.log(err);
+    }
+  }
+}
+
+// Lets start by creating a user with email and password
+export const createUserWithEmailAndPasswordFunc = async (email, password) => {
+  if(!email || !password){
+    return;
+  }
+
+  try {
+    // Async function because anything that is contacting outside services is always async
+    return await createUserWithEmailAndPassword(auth, email, password);
+  }catch(e) {
+    if(e.code === 'auth/email-already-in-use'){
+      alert("Email already in use");
     }
   }
 }
