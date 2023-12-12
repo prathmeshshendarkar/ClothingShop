@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { signInWithPopup , GoogleAuthProvider , getAuth } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCioCrg1Tljc37byoh209TbP_b3xtc3fCU",
@@ -64,4 +64,14 @@ export const createUserWithEmailAndPasswordFunc = async (email, password) => {
       alert("Email already in use");
     }
   }
+}
+
+// Verify the email and password
+export const signInUserWithEmailAndPasswordFunc = async (email, password) => {
+  if(!email || !password){
+    return;
+  }
+
+  // Async function because anything that is contacting outside services is always async
+  return await signInWithEmailAndPassword(auth, email, password);
 }

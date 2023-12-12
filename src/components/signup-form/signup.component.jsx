@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPasswordFunc } from "../../utils/firebase.utils";
 import InputForm from "../input-form/inputform.component";
 import './signup.component.scss'
+import Button from "../button/button.component";
 
 const formFields = {
     username: '',
@@ -38,14 +39,12 @@ const SignUpForm = () => {
         <div className="sign-up-container">
             <h2>Register and start shopping!!!</h2>
             <form onSubmit={onSubmitHandler}>
-                <h1>Signup Page</h1>
-
                 <InputForm required label='Display Name' type='text' name='username' value={formField.username} onChange={onChangeHandler} />
                 <InputForm required label='Email' type='email' name='email' value={formField.email} onChange={onChangeHandler} />
                 <InputForm required label='Password' type='password' name='password' value={formField.password} onChange={onChangeHandler} />
                 <InputForm required label='Confirm Password' type='password' name='confirmpassword' value={formField.confirmpassword} onChange={onChangeHandler} />
                 
-                <button type='submit'>Sign Up</button>
+                <Button label="Sign Up" buttonType="inverted" type="submit"></Button>
             </form>
         </div>
     );
