@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import InputForm from "../input-form/inputform.component";
 import './signin.component.scss'
 import Button from "../button/button.component";
-import { SignInWithGoogleAuth , createUserDocument , signInUserWithEmailAndPasswordFunc } from "../../utils/firebase.utils";
+import { SignInWithGoogleAuth , signInUserWithEmailAndPasswordFunc } from "../../utils/firebase.utils";
+import { UserContext } from "../../contexts/externalcontexts";
 
 const formFields = {
     email: '',
@@ -13,6 +14,7 @@ const SignInForm = () => {
     // In this form we need to verify the email and password entered by user
 
     const [formField, setformField] = useState(formFields);
+    const {setuserStorage} = useContext(UserContext);
 
     const onChangeHandler = (event) => {
         // The event will give name, value, etc
@@ -27,8 +29,8 @@ const SignInForm = () => {
         console.log(formField);
 
         try {
-            const resp = await signInUserWithEmailAndPasswordFunc(formField.email, formField.password);
-            console.log(resp);
+            const {user} = await signInUserWithEmailAndPasswordFunc(formField.email, formField.password);
+            setuserStorage(user);
         }catch (e){
             console.log(e);
             if(e.code === 'auth/invalid-login-credentials'){
@@ -38,10 +40,10 @@ const SignInForm = () => {
     }
 
     const logUser = async () => {
-        const res = await SignInWithGoogleAuth();
-        console.log(res);
-        const userDocRefOb = await createUserDocument(res.user);
-        console.log(userDocRefOb);
+        const {user} = await SignInWithGoogleAuth();
+        setuserStorage(user);
+        // const userDocRefOb = await createUserDocument(res.user);
+        // console.log(userDocRefOb);
     }
 
     return (

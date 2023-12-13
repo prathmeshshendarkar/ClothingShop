@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { signInWithPopup , GoogleAuthProvider , getAuth } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore'
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut} from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCioCrg1Tljc37byoh209TbP_b3xtc3fCU",
@@ -29,19 +29,21 @@ export const SignInWithGoogleAuth = () => signInWithPopup(auth, provider);
 // Lets start by making a collection and storing all of our users in the storage
 const db = getFirestore(app);
 
-export const createUserDocument = async (userAuth) => {
+export const createUserDocument = async (userAuth, AdditionalInformation = {}) => {
+  userAuth.displayName = AdditionalInformation.username;
+
   const userDocumentRef = doc(db, 'users', userAuth.uid);
 
   console.log(userDocumentRef);
 
   const getUserRef = await getDoc(userDocumentRef);
-  console.log(getUserRef);
-  console.log(getUserRef.exists());
+  // console.log(getUserRef);
+  // console.log(getUserRef.exists());
 
   if(!getUserRef.exists()){
     const {displayName, email} = userAuth;
     const createdAt = new Date();
-
+    // console.log(userAuth);
     try {
       await setDoc(userDocumentRef, {displayName, email, createdAt});
     }catch (err){
@@ -55,15 +57,8 @@ export const createUserWithEmailAndPasswordFunc = async (email, password) => {
   if(!email || !password){
     return;
   }
-
-  try {
-    // Async function because anything that is contacting outside services is always async
-    return await createUserWithEmailAndPassword(auth, email, password);
-  }catch(e) {
-    if(e.code === 'auth/email-already-in-use'){
-      alert("Email already in use");
-    }
-  }
+  // Async function because anything that is contacting outside services is always async
+  return await createUserWithEmailAndPassword(auth, email, password);
 }
 
 // Verify the email and password
@@ -75,3 +70,5 @@ export const signInUserWithEmailAndPasswordFunc = async (email, password) => {
   // Async function because anything that is contacting outside services is always async
   return await signInWithEmailAndPassword(auth, email, password);
 }
+
+export const signOutUser = async () => await signOut(auth);

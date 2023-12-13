@@ -1,9 +1,18 @@
 import { Link, Outlet } from "react-router-dom";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { ReactComponent as Crown } from "../../assets/crown.svg";
+import { UserContext } from "../../contexts/externalcontexts";
+import { signOutUser } from "../../utils/firebase.utils";
 import './navigation-component.scss'
 
 const Navigation = () => {
+  const {userStorage, setuserStorage} = useContext(UserContext);
+
+  const onClickHandler = async () => {
+    await signOutUser();
+    setuserStorage(null);
+  }
+
   return (
     <Fragment>
       <div className="navigation">
@@ -14,9 +23,16 @@ const Navigation = () => {
           <Link className="nav-link" to="/shop">
             Shop
           </Link>
-          <Link className="nav-link" to="/auth">
-            Sign In
-          </Link>
+          {
+            userStorage ? (
+              <span className="nav-link" onClick={onClickHandler}>{' '}
+              Sign Out{' '}</span>
+            ) : (
+              <Link className="nav-link" to="/auth">
+                Sign In
+              </Link>
+            )
+          }
         </div>
       </div>
       <Outlet />
