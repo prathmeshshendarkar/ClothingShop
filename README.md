@@ -16,3 +16,7 @@
     - third, navigation component will check if the storage is set then will alter it with signout(done)
     - fourth, now for building signout feature I will need to work on firebase utils file(done signout feature)
     - fifth, signup component will set the userstorage and userrefdoc (done, a little modification in firebase file as well)
+
+- 15/12/2023
+    - first I need to build a onAuthState change function in utils library
+    - It looks like there is too much redundant for my user context. I mean, like I am setting user auth values too much spreaded. I can round it off to one file.

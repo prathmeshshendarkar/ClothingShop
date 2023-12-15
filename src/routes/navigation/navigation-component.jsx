@@ -6,12 +6,12 @@ import { signOutUser } from "../../utils/firebase.utils";
 import './navigation-component.scss'
 
 const Navigation = () => {
-  const {userStorage, setuserStorage} = useContext(UserContext);
-
-  const onClickHandler = async () => {
-    await signOutUser();
-    setuserStorage(null);
-  }
+  const {userStorage} = useContext(UserContext);
+  // console.log(userStorage);
+  // const onClickHandler = async () => {
+  //   await signOutUser();
+  //   setuserStorage(null);
+  // }
 
   return (
     <Fragment>
@@ -24,10 +24,13 @@ const Navigation = () => {
             Shop
           </Link>
           {
+            // console.log("I am nav");
+            // console.log("I am nav");
             userStorage ? (
-              <span className="nav-link" onClick={onClickHandler}>{' '}
+              <span className="nav-link" onClick={signOutUser}>{' '}
               Sign Out{' '}</span>
             ) : (
+              
               <Link className="nav-link" to="/auth">
                 Sign In
               </Link>

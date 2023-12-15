@@ -1,9 +1,9 @@
-import { useState , useContext} from "react";
+import { useState} from "react";
 import { createUserWithEmailAndPasswordFunc , createUserDocument} from "../../utils/firebase.utils";
 import InputForm from "../input-form/inputform.component";
 import './signup.component.scss'
 import Button from "../button/button.component";
-import { UserContext } from "../../contexts/externalcontexts";
+// import { UserContext } from "../../contexts/externalcontexts";
 
 const formFields = {
     username: '',
@@ -18,7 +18,7 @@ const SignUpForm = () => {
     // State will store that information and then onSubmit we can pass that information to firebase
 
     const [formField, setformField] = useState(formFields);
-    const {setuserStorage} = useContext(UserContext);
+    // const {setuserStorage} = useContext(UserContext);
 
     const onChangeHandler = (event) => {
         // The event will give name, value, etc
@@ -38,7 +38,7 @@ const SignUpForm = () => {
             const username = formField.username;
             await createUserDocument(user, { username });
 
-            setuserStorage(user);
+            // setuserStorage(user);
         }catch(e){
             if(e.code === 'auth/email-already-in-use'){
                 alert("Email already in use");
