@@ -31,14 +31,14 @@ const db = getFirestore(app);
 
 export const createUserDocument = async (userAuth, AdditionalInformation = {}) => {
   
-  if(!Object.keys(AdditionalInformation).length === 0){ 
-    userAuth.displayName = AdditionalInformation.username;
-  }
+  // if(!Object.keys(AdditionalInformation).length === 0){ 
+  //   userAuth.displayName = AdditionalInformation.username;
+  // }
 
-  console.log(AdditionalInformation);
+  // console.log(AdditionalInformation);
   const userDocumentRef = doc(db, 'users', userAuth.uid);
 
-  console.log(userDocumentRef);
+  // console.log(userDocumentRef);
 
   const getUserRef = await getDoc(userDocumentRef);
   // console.log(getUserRef);

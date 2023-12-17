@@ -3,10 +3,14 @@ import { Fragment, useContext } from "react";
 import { ReactComponent as Crown } from "../../assets/crown.svg";
 import { UserContext } from "../../contexts/externalcontexts";
 import { signOutUser } from "../../utils/firebase.utils";
+import CartIcon from "../../components/cart-icon/cart-icon.component";
 import './navigation-component.scss'
+import CartDropDown from "../../components/cart-dropdown/cartdropdown.component";
+import { CartContext } from "../../contexts/cartcontexts";
 
 const Navigation = () => {
   const {userStorage} = useContext(UserContext);
+  const {cartOpen} = useContext(CartContext);
   // console.log(userStorage);
   // const onClickHandler = async () => {
   //   await signOutUser();
@@ -24,8 +28,6 @@ const Navigation = () => {
             Shop
           </Link>
           {
-            // console.log("I am nav");
-            // console.log("I am nav");
             userStorage ? (
               <span className="nav-link" onClick={signOutUser}>{' '}
               Sign Out{' '}</span>
@@ -36,7 +38,9 @@ const Navigation = () => {
               </Link>
             )
           }
+          <CartIcon />
         </div>
+        {cartOpen && <CartDropDown />}
       </div>
       <Outlet />
     </Fragment>

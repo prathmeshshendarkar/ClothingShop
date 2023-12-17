@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import { createUserWithEmailAndPasswordFunc , createUserDocument} from "../../utils/firebase.utils";
 import InputForm from "../input-form/inputform.component";
 import './signup.component.scss'
@@ -34,9 +34,9 @@ const SignUpForm = () => {
 
         try {
             const {user} = await createUserWithEmailAndPasswordFunc(formField.email, formField.password);
-
-            const username = formField.username;
-            await createUserDocument(user, { username });
+            user.displayName = formField.username;
+            // const username = formField.username;
+            await createUserDocument(user);
 
             // setuserStorage(user);
         }catch(e){
