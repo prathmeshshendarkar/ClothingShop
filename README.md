@@ -33,3 +33,8 @@
     - first, lets create cart icon and style the icon (done)
     - second, we need a dropdown menu that will contain the product items, lets build that component. (done)
     - After that we need a cartcontext for toggling the cartdropdown. (done)
+
+- 20/12/2023
+    - I haven't been able to update what I was doing in two to three days. I haven't added much functionality into the application.
+    - However, the one thing which I added is adding items to the cart(done)
+    - Yes, now you can add Items to the cart and view them in the cart dropdown.
