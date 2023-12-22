@@ -38,3 +38,12 @@
     - I haven't been able to update what I was doing in two to three days. I haven't added much functionality into the application.
     - However, the one thing which I added is adding items to the cart(done)
     - Yes, now you can add Items to the cart and view them in the cart dropdown.
+
+- 21/12/2023
+    - The checkout page is created and is linked to Buy button from the cart dropdown. (done)
+
+- 22/12/2023
+    - The checkout page is completed, with the following functionalities.
+        - We can increment and decrement the items that are added to the cart.
+        - The total quantity is visible
+        - The Item remove functionality is also added.
