@@ -7,6 +7,8 @@ import CartIcon from "../../components/cart-icon/cart-icon.component";
 import './navigation-component.scss'
 import CartDropDown from "../../components/cart-dropdown/cartdropdown.component";
 import { CartContext } from "../../contexts/cartcontexts";
+// import { useNavigate } from "react-router-dom";
+
 
 const Navigation = () => {
   const {userStorage} = useContext(UserContext);
@@ -16,6 +18,8 @@ const Navigation = () => {
   //   await signOutUser();
   //   setuserStorage(null);
   // }
+
+  // const navigate = useNavigate();
 
   return (
     <Fragment>
@@ -31,6 +35,9 @@ const Navigation = () => {
             userStorage ? (
               <span className="nav-link" onClick={signOutUser}>{' '}
               Sign Out{' '}</span>
+              // {
+              //   navigate("/")
+              // }
             ) : (
               
               <Link className="nav-link" to="/auth">
