@@ -47,3 +47,12 @@
         - We can increment and decrement the items that are added to the cart.
         - The total quantity is visible
         - The Item remove functionality is also added.
+
+- 23/12/2023 & 24/12/2023
+    - I accumulated the firebase storage with the json data using writeBatch method.
+    - The json data was now fetched into the categories context rather than using the hard coded json data.
+    - The changes were applied to the application i.e. wherever the hardcoded products values were used.
+    - After that, the shop route was modifed with all the categories(hats, jackets, shoes...)
+
+- 25/12/2023
+    - Today, I will need to first build the individual category page i.e. shop/:category

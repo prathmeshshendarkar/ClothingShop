@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { signInWithPopup , GoogleAuthProvider , getAuth } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore'
+import { getFirestore, doc, setDoc, getDoc, collection, writeBatch , query , getDocs} from 'firebase/firestore'
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut , onAuthStateChanged } from 'firebase/auth'
 
 const firebaseConfig = {
@@ -28,6 +28,43 @@ export const SignInWithGoogleAuth = () => signInWithPopup(auth, provider);
 
 // Lets start by making a collection and storing all of our users in the storage
 const db = getFirestore(app);
+
+export const createCollection = async (collectionName, products) => {
+  const collectionRef = collection(db, collectionName)
+
+  // Since we have the collection ref, it's time to use writeBatch for adding data into firestore
+  const batch = writeBatch(db);
+
+  products.forEach((category) => {
+    // Now since we have the collection ref, lets get the document ref
+    const docRef = doc(collectionRef, category.title.toLowerCase());
+    batch.set(docRef, category);
+    // console.log(category);
+  });
+
+  await batch.commit();
+  console.log("Products Added");
+
+}
+
+export const getCollectionDocs = async () => {
+  const collectionRef = collection(db, "categories");
+
+  const q = query(collectionRef); // Usually we supply some query constraints, so that we can filter what documents are required.
+
+  const querySnapshot = await getDocs(q);
+
+  const categoryObjects = querySnapshot.docs.reduce((ac, iv) => {
+    const {title, items} = iv.data(); // The docs property has data attribute to return us the data for each document
+
+    ac[title.toLowerCase()] = items; // Since we already initialized the reduce function with the empty object, now we use the accumulator to accumulate each document into that empty object.
+
+    return ac;
+  }, {});
+
+  console.log(categoryObjects);
+  return categoryObjects;
+}
 
 export const createUserDocument = async (userAuth, AdditionalInformation = {}) => {
   

@@ -1,5 +1,5 @@
 import './directory-component.scss'
-import Category from '../category/category-component'
+import DirectoryItem from '../directoryitem/directoryitem';
 
 const Directory = ({categories}) => {
     // console.log(categories);
@@ -7,7 +7,7 @@ const Directory = ({categories}) => {
         <div className='directory-container'>
             {categories.map((category) => {
                 return (
-                <Category key={category.id} category={category} />
+                <DirectoryItem key={category.id} category={category} />
                 )
             })}
         </div>
