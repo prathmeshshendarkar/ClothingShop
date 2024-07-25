@@ -1,6 +1,6 @@
-# Clothingshop
+# StyleHub
 
-Clothingshop is a cutting-edge online fashion platform designed to offer a seamless shopping experience. The platform includes robust functionalities like user authentication, product catalog browsing, advanced search and filtering capabilities, and efficient order management.
+StyleHub is a cutting-edge online fashion platform designed to offer a seamless shopping experience. The platform includes robust functionalities like user authentication, product catalog browsing, advanced search and filtering capabilities, and efficient order management.
 
 ## Features
 
